@@ -12,9 +12,8 @@ $( function() {
   var $grid = $('.isotope');
 
   // bind filter button click
-  var $filters = $('#filters').on( 'click', 'a', function() {
+  var $filters = $('#filters').on( 'click', 'li', function() {
     var filterAttr = $( this ).attr('data-filter');
-    console.log(filterAttr);
     // set filter in hash
     location.hash = 'filter=' + encodeURIComponent( filterAttr );
   });
@@ -27,15 +26,17 @@ $( function() {
       return;
     }
     isIsotopeInit = true;
+    console.log(hashFilter);
     // filter isotope
     $grid.isotope({
-      itemSelector: '.selector col-md-6 col-lg-4',
+      // itemSelector: '.selector.col-md-6.col-lg-4',
       filter: hashFilter
     });
     // set selected class on button
     if ( hashFilter ) {
-      $filters.find('.is-checked').removeClass('is-checked');
-      $filters.find('[data-filter="' + hashFilter + '"]').addClass('is-checked');
+      $filters.find('.active').removeClass('active');
+      console.log($filters.find('.active'));
+      $filters.find('[data-filter="' + hashFilter + '"]').addClass('active');
     }
   }
 
